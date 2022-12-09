@@ -1,6 +1,4 @@
-﻿
-
-public class Directory
+﻿public class Directory
 {
     public string Name { get; set; }
 

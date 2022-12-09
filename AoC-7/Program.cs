@@ -1,8 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
-// 1325919
-
-//using var reader = new StreamReader("ex.txt");
-using var reader = new StreamReader("input/day7input.txt");
+﻿
+//using var reader = new StreamReader("input/ex.txt");
+using var reader = new StreamReader("input/day7input.txt"); // 1325919
 
 var content = reader.ReadToEnd();
 
@@ -16,7 +14,6 @@ foreach(var command in commands)
     command.Run(context);
 }
 
-var dir = context.Directories.Where(x => x.GetSize() <= 100000);
-var sum = dir.Sum(x => x.GetSize());
+var sum = context.Directories.Where(x => x.GetSize() <= 100000).Sum(x => x.GetSize());
 
 Console.WriteLine(sum);
