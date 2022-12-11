@@ -12,6 +12,7 @@ public class PlayEngine
 {
     private readonly int _rounds;
     private IEnumerable<Monkey> _monkeys;
+    private Func<long, long> _calculateWorryLevelAfterPlaying = x => x / 3;
 
     public PlayEngine(int rounds, IEnumerable<Monkey> monkeys, Part part)
     {
@@ -25,12 +26,8 @@ public class PlayEngine
         if (part != Part.PartTwo)
             return;
 
-        var lcm = FindLCM(_monkeys.Select(x => x.DivideNumber));
-
-        foreach (var monkey in _monkeys)
-        {
-            monkey.CalculateWorryLevelAfterPlaying = x => x % lcm;
-        }
+        var lcm = LCMHelper.FindLCM(_monkeys.Select(x => x.DivideNumber));
+        _calculateWorryLevelAfterPlaying = x => x % lcm;
     }
 
     public PlayResult Start()
@@ -46,11 +43,13 @@ public class PlayEngine
     {
         foreach (var monkey in _monkeys)
         {
-            var items = monkey.Play();
+            var items2 = monkey.Play();
+            items2 = items2.Select(x => _calculateWorryLevelAfterPlaying(x));
 
-            foreach (var item in items)
+            foreach (var item in items2)
             {
-                _monkeys.ElementAt(item.DestinationMonkeyIndex).Items.Enqueue(item.Item);
+                var index = monkey.GetItemNextDestination(item);
+                _monkeys.ElementAt(index).Items.Enqueue(item);
             }
         }
     }
@@ -59,24 +58,5 @@ public class PlayEngine
     {
         var topMonkeys = _monkeys.OrderByDescending(x => x.ItemsInspected).Take(2);
         return topMonkeys.ElementAt(0).ItemsInspected * topMonkeys.ElementAt(1).ItemsInspected;
-    }
-
-    public static long FindLCM(IEnumerable<long> numbers)
-    {
-        var result = numbers.First();
-        foreach (var number in numbers.Skip(1))
-        {
-            result = number * result / FindGCD(number, result);
-        }
-
-        return result;
-    }
-
-    public static long FindGCD(long a, long b)
-    {
-        if (b == 0)
-            return a;
-
-        return FindGCD(b, a % b);
     }
 }

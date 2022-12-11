@@ -32,8 +32,7 @@ public class InstructionsReader
                 DivideNumber = divide,
                 HappyThrowIndex = happyIndex,
                 SadThrowIndex = sadIndex,
-                CalculateWorryLevelWhilePlaying = ToCalculateWorryLevel(worryLevelOperator, operationValue),
-                CalculateWorryLevelAfterPlaying = x => x / 3
+                CalculateWorryLevelWhilePlaying = ToCalculateWorryLevel(worryLevelOperator, operationValue)
             };
 
             foreach (var item in items)
