@@ -16,7 +16,7 @@ public class PlayEngine
     public PlayEngine(int rounds, IEnumerable<Monkey> monkeys, Part part)
     {
         _rounds = rounds;
-        _monkeys = monkeys.ToArray();
+        _monkeys = monkeys;
         SetRelaxCulculation(part);
     }
 
