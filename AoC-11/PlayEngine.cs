@@ -27,16 +27,16 @@ public class PlayEngine
 
         var lcm = FindLCM(_monkeys.Select(x => x.DivideNumber));
 
-        foreach(var monkey in _monkeys)
+        foreach (var monkey in _monkeys)
         {
             monkey.CalculateWorryLevelAfterPlaying = x => x % lcm;
         }
     }
 
     public PlayResult Start()
-    {        
-        for (var i = 0; i < _rounds; i++)        
-            PlayRound();        
+    {
+        for (var i = 0; i < _rounds; i++)
+            PlayRound();
 
         var monkeyBusiness = CalculateMonkeyBusiness();
         return new PlayResult(monkeyBusiness);

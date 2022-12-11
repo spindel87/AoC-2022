@@ -11,11 +11,11 @@ public class Monkey
     public long DivideNumber { get; set; }
     public int HappyThrowIndex { get; set; }
     public int SadThrowIndex { get; set; }
-    public long ItemsInspected { get; private set; }    
+    public long ItemsInspected { get; private set; }
 
     public IEnumerable<ThrownItem> Play()
     {
-        if(!Items.Any())
+        if (!Items.Any())
             return Enumerable.Empty<ThrownItem>();
 
         var throwItems = new List<ThrownItem>();
