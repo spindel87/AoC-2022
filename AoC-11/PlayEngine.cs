@@ -34,16 +34,11 @@ public class PlayEngine
     }
 
     public PlayResult Start()
-    {
-        Console.WriteLine("Play started");
-        for (var i = 0; i < _rounds; i++)
-        {
-            Console.WriteLine($"Round - {i+1}");
-            PlayRound();
-        }
+    {        
+        for (var i = 0; i < _rounds; i++)        
+            PlayRound();        
 
         var monkeyBusiness = CalculateMonkeyBusiness();
-
         return new PlayResult(monkeyBusiness);
     }
 

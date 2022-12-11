@@ -8,5 +8,5 @@ var monkeys = instructionsReader.GetMonkeys("input/input1.txt"); // 78960, 14561
 var playEngine = new PlayEngine(10000, monkeys, Part.PartTwo);
 var result = playEngine.Start();
 
-Console.WriteLine(result.MonkeyBusiness);
+Console.WriteLine($"MonkeyBusiness: {result.MonkeyBusiness}");
 Console.ReadLine();
